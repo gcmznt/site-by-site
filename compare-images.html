@@ -1,0 +1,120 @@
+<html>
+<head>
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+	<style>
+		.wrapper * {
+			transition: all 2s;
+			-moz-transition: all 2s; /* Firefox 4 */
+			-webkit-transition: all 2s; /* Safari and Chrome */
+			-o-transition: all 2s; /* Opera */
+		}
+		.navbar-form input {
+			height: 25px;
+		}
+		.options {
+			width: 960px;
+			margin: auto;
+		}
+		.wrapper {
+			width: 1280px;
+			height: 100%;
+			margin: auto;
+			position: relative;
+			overflow: hidden;
+			padding-bottom: 30px;
+		}
+		.sx {
+			position: absolute;
+			overflow: hidden;
+			text-align: left;
+			left: 0;
+			top: 0;
+			width: 50%;
+			height: 100%;
+		}
+		.sx img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			max-width: none;
+		}
+		.dx {
+			position: absolute;
+			overflow: hidden;
+			text-align: right;
+			right: 0;
+			top: 0;
+			width: 50%;
+			height: 100%;
+		}
+		.dx img {
+			position: absolute;
+			top: 0;
+			right: 0;
+			max-width: none;
+		}
+		.overlapped .sx,
+		.overlapped .dx {
+			width: 100%;
+		}
+		.overlapped .dx {
+			opacity: 0.5;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="sidebyside">
+			<div class="sx"><img src="./img/web.png" alt="" id="img1"></div>
+			<div class="dx"><img src="./img/tchouk.png" alt="" id="img2"></div>
+		</div>
+	</div>
+	<div class="navbar navbar-inverse navbar-fixed-bottom">
+		<div class="navbar-inner">
+			<div class="options navbar-form">
+				<div class="pull-right">
+					<div class="btn-group" data-toggle="buttons-radio">
+						<button type="button" class="btn sidebyside active"><i class="icon-th-large"></i></button>
+						<button type="button" class="btn overlapped"><i class="icon-picture"></i></button>
+					</div>
+				</div>
+				<input type="text" placeholder="URL 1" class="" id="url1">
+				<button type="button" class="btn switcher"><i class="icon-resize-horizontal"></i></button>
+				<input type="text" placeholder="URL 2" class="" id="url2">
+				<button type="button" class="btn btn-primary load"><i class="icon-refresh icon-white"></i></button>
+			</div>
+		</div>
+	</div>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('.options .sidebyside').click(function(){
+				$('.wrapper > div').removeClass().addClass('sidebyside');
+			});
+			$('.options .overlapped').click(function(){
+				$('.wrapper > div').removeClass().addClass('overlapped');
+			});
+			$('.switcher').click(function(){
+				var sximg = $('.sx img').attr('src');
+				var dximg = $('.dx img').attr('src');
+				$('.sx img').attr('src', dximg);
+				$('.dx img').attr('src', sximg);
+				var sxurl = $('#url1').val();
+				var dxurl = $('#url2').val();
+				$('#url1').val(dxurl);
+				$('#url2').val(sxurl);
+			});
+
+			var h1 = $('#img1').height();
+			var h2 = $('#img2').height();
+			if (h1 > h2) {
+				$('.wrapper').height(h1 + 'px');
+			} else {
+				$('.wrapper').height(h2 + 'px');
+			}
+		});
+	</script>
+</body>
+</html>
